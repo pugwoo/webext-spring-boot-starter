@@ -11,7 +11,7 @@
 ## 3. 功能介绍：在spring-boot-web的基础上，支持以下特性：
 
 1. @JsonParam 自动解析json字符串为参数
-2. 支持返回对象进行下载
+2. 支持返回DownloadBean对象进行下载
 3. 自动解析日期，将String转换成Date和LocalDateTime
 4. 输出Date类型时，直接按字面值输出格式yyyy-MM-dd HH:mm:ss
 
