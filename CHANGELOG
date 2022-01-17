@@ -1,6 +1,7 @@
 v0.1.0 - [enhance] @JsonParam支持@Validated进行数据校验
        - [enhance] @JsonParam支持泛型，与@RequestBody对Json的解析保持一致
        - [enhance] Date日期格式增加3种格式
+       - [upgrade] 升级spring boot到2.5.8，其它pom依赖至最新版本
 
 2019年9月5日
 v0.0.8 - [add] 支持设置spring.jackson.default-property-inclusion=non_null排除掉转json中的null值
