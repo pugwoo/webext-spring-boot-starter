@@ -4,9 +4,6 @@ import com.pugwoo.webextstarterdemo.bean.WebJsonBean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,9 +29,9 @@ public class TestDateToStringController {
             result.put("date", time);
         }
         result.put("now", new Date());
-        result.put("localDate", LocalDate.now());
-        result.put("localDateTime", LocalDateTime.now());
-        result.put("localTime", LocalTime.now());
+        //result.put("localDate", LocalDate.now()); // jackson 2.13+ 不建议再用java8的日期了，还是用回java6的Date
+        //result.put("localDateTime", LocalDateTime.now());
+        //result.put("localTime", LocalTime.now());
         return new WebJsonBean(result);
     }
 
