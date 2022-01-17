@@ -28,7 +28,7 @@
     <dependency>
       <groupId>com.pugwoo</groupId>
       <artifactId>webext-spring-boot-starter</artifactId>
-      <version>0.0.9-SNAPSHOT</version>
+      <version>0.1.0</version>
     </dependency>
 
     <dependency>
