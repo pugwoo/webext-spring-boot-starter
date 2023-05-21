@@ -1,3 +1,5 @@
+v0.1.1 - [fix] 修复因自定义ObjectMapper而出现LocalDate/LocalDateTime序列化成json报错的问题
+
 2022年1月17日
 v0.1.0 - [enhance] @JsonParam支持@Validated进行数据校验
        - [enhance] @JsonParam支持泛型，与@RequestBody对Json的解析保持一致

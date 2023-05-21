@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.pugwoo.bootwebext.SpringBootWebextAutoConfiguration
+com.pugwoo.bootwebext.SpringBootWebextAutoConfiguration,\
+com.pugwoo.bootwebext.CustomObjectMapperConfiguration
