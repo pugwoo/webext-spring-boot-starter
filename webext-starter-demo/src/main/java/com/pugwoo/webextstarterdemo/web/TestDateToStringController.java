@@ -4,22 +4,20 @@ import com.pugwoo.webextstarterdemo.bean.WebJsonBean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * 输出Date类型时，按0时区处理，输出格式yyyy-MM-dd HH:mm:ss
- * @date 2018-06-22
+ * 2018-06-22
  */
 @RestController
 public class TestDateToStringController {
 
-    /**
-     * http://127.0.0.1:8080/testDateToString?time=20180911
-     * @param time
-     * @return
-     */
     @RequestMapping("/testDateToString")
     public WebJsonBean testDateToString(Date time){
         Map<String, Object> result = new HashMap<>();
@@ -28,10 +26,15 @@ public class TestDateToStringController {
         } else {
             result.put("date", time);
         }
-        result.put("now", new Date());
-        //result.put("localDate", LocalDate.now()); // jackson 2.13+ 不建议再用java8的日期了，还是用回java6的Date
-        //result.put("localDateTime", LocalDateTime.now());
-        //result.put("localTime", LocalTime.now());
+
+        Map<String, Object> now = new HashMap<>();
+        result.put("now", now);
+
+        now.put("Date", new Date());
+        now.put("LocalDate", LocalDate.now());
+        now.put("LocalDateTime", LocalDateTime.now());
+        now.put("LocalTime", LocalTime.now());
+
         return new WebJsonBean(result);
     }
 
