@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilde
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -27,17 +26,14 @@ public class SpringBootWebextAutoConfiguration implements WebMvcConfigurer {
 	 */
 	@Bean
 	public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
-	    return new Jackson2ObjectMapperBuilderCustomizer() {
-	        @Override
-	        public void customize(Jackson2ObjectMapperBuilder builder) {
-	        	/**
-	        	 * 虽然SimpleDateFormat非线程安全，但jackson拿到DateFormat后会clone一份
-	        	 * 使得jackson内部是线程安全的
-	        	 * https://stackoverflow.com/questions/33672037/is-it-safe-to-use-simpledateformat-in-fasterxmls-objectmapper
-	        	 */
-	            builder.dateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-	        }           
-	    };
+	    return builder -> {
+			/*
+			 * 虽然SimpleDateFormat非线程安全，但jackson拿到DateFormat后会clone一份
+			 * 使得jackson内部是线程安全的
+			 * https://stackoverflow.com/questions/33672037/is-it-safe-to-use-simpledateformat-in-fasterxmls-objectmapper
+			 */
+			builder.dateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+		};
 	}
 
     /**
