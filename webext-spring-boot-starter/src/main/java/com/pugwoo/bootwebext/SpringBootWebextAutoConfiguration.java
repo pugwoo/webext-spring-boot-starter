@@ -2,7 +2,7 @@ package com.pugwoo.bootwebext;
 
 import com.pugwoo.bootwebext.converter.StringToDateConverter;
 import com.pugwoo.bootwebext.converter.StringToLocalDateTimeConverter;
-import com.pugwoo.bootwebext.resolver.json.JsonParamArgumentResolver;
+import com.pugwoo.bootwebext.resolver.JsonParamArgumentResolver;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;

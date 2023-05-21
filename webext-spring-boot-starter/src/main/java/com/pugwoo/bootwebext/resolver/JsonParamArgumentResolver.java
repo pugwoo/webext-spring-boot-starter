@@ -1,4 +1,4 @@
-package com.pugwoo.bootwebext.resolver.json;
+package com.pugwoo.bootwebext.resolver;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
@@ -21,7 +21,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 
-import static com.pugwoo.bootwebext.resolver.utils.AbstractMessageConverterMethodArgumentResolverUtil.*;
+import static com.pugwoo.bootwebext.resolver.AbstractMessageConverterMethodArgumentResolverUtil.*;
 
 /**
  * http://zjumty.iteye.com/blog/1927890
