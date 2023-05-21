@@ -18,7 +18,7 @@ public class DownloadBean extends ResponseEntity<byte[]> {
 	
 	/**
 	 * 构造一个下载bean
-	 * @param filename
+	 * @param filename 下载文件的保存名称
 	 * @param content 按照系统默认编码(utf-8)转成byte[]
 	 */
 	public DownloadBean(String filename, String content) {
@@ -37,7 +37,7 @@ public class DownloadBean extends ResponseEntity<byte[]> {
 	
 	/**
 	 * 构造一个下载bean
-	 * @param filename
+	 * @param filename 下载文件的保存名称
 	 * @param content 按照系统默认编码(utf-8)转成byte[]
 	 */
 	public DownloadBean(String filename, String content, Map<String, String> headers) {
