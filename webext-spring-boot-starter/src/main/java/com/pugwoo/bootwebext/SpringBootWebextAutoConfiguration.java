@@ -1,5 +1,6 @@
 package com.pugwoo.bootwebext;
 
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.pugwoo.bootwebext.converter.StringToDateConverter;
 import com.pugwoo.bootwebext.converter.StringToLocalDateConverter;
 import com.pugwoo.bootwebext.converter.StringToLocalDateTimeConverter;
@@ -13,6 +14,8 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @ConditionalOnWebApplication
@@ -22,13 +25,21 @@ public class SpringBootWebextAutoConfiguration implements WebMvcConfigurer {
 	@Value("${webext.format.date:yyyy-MM-dd HH:mm:ss}")
 	private String dateFormat;
 
+	@Value("${webext.format.localDateTime:yyyy-MM-dd HH:mm:ss}")
+	private String localDateTimeFormat;
+
 	/**
 	 * 设置Date类型的输出格式为yyyy-MM-dd HH:mm:ss
 	 */
 	@Bean
 	public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
 	    return builder -> {
-			builder.simpleDateFormat(dateFormat);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern(localDateTimeFormat);
+			LocalDateTimeSerializer localDateTimeSerializer = new LocalDateTimeSerializer(formatter);
+
+			builder.failOnEmptyBeans(false) // prevent InvalidDefinitionException Error
+					.serializerByType(LocalDateTime.class, localDateTimeSerializer)
+					.simpleDateFormat(dateFormat);
 		};
 	}
 

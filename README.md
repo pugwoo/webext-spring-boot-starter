@@ -31,8 +31,11 @@
 3. 使用者无需添加任何配置，开箱即用。以下是可以设置的参数：
 
 ```
-# 设置日期格式化输出格式，默认为yyyy-MM-dd HH:mm:ss
+# 设置Date日期格式化输出格式，默认为yyyy-MM-dd HH:mm:ss
 webext.format.date=yyyy-MM-dd HH:mm:ss
+
+# 设置LocalDateTime日期格式化输出格式，默认为yyyy-MM-dd HH:mm:ss
+webext.format.localDateTime=yyyy-MM-dd HH:mm:ss
 ```
 
 # ====== 使用说明 ======
