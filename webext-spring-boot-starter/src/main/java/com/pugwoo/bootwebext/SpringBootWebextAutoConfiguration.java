@@ -4,6 +4,7 @@ import com.pugwoo.bootwebext.converter.StringToDateConverter;
 import com.pugwoo.bootwebext.converter.StringToLocalDateConverter;
 import com.pugwoo.bootwebext.converter.StringToLocalDateTimeConverter;
 import com.pugwoo.bootwebext.resolver.JsonParamArgumentResolver;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -18,13 +19,16 @@ import java.util.List;
 @Configuration
 public class SpringBootWebextAutoConfiguration implements WebMvcConfigurer {
 
+	@Value("${webext.format.date:yyyy-MM-dd HH:mm:ss}")
+	private String dateFormat;
+
 	/**
 	 * 设置Date类型的输出格式为yyyy-MM-dd HH:mm:ss
 	 */
 	@Bean
 	public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
 	    return builder -> {
-			builder.simpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			builder.simpleDateFormat(dateFormat);
 		};
 	}
 
