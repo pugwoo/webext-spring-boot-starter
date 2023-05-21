@@ -1,15 +1,13 @@
 package com.pugwoo.bootwebext.resolver.json;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 import com.pugwoo.bootwebext.JsonParam;
+import com.pugwoo.wooutils.json.JSON;
 import org.springframework.core.Conventions;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.converter.HttpMessageConversionException;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.WebDataBinder;
@@ -23,20 +21,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 
-import static com.pugwoo.bootwebext.resolver.utils.AbstractMessageConverterMethodArgumentResolverUtil.adaptArgumentIfNecessary;
-import static com.pugwoo.bootwebext.resolver.utils.AbstractMessageConverterMethodArgumentResolverUtil.isBindExceptionRequired;
-import static com.pugwoo.bootwebext.resolver.utils.AbstractMessageConverterMethodArgumentResolverUtil.validateIfApplicable;
+import static com.pugwoo.bootwebext.resolver.utils.AbstractMessageConverterMethodArgumentResolverUtil.*;
 
 /**
  * http://zjumty.iteye.com/blog/1927890
  * 些许改造 2015年8月15日 12:13:01
  * 2018年3月14日 16:52:42 完整支持了泛型，支持1或2个泛型，不支持3个及以上
- *
  * 2022年01月12日 支持泛型，采用springboot的方案，与@RequestBody对json的解析保持一致
  */
 public class JsonParamArgumentResolver implements HandlerMethodArgumentResolver {
-	
-	private static final ObjectMapper OBJECT_MAPPER = new MyObjectMapper(false);
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
@@ -68,8 +61,7 @@ public class JsonParamArgumentResolver implements HandlerMethodArgumentResolver 
 	/**
 	 * 解析参数对象
 	 */
-	private Object parseJsonParam(MethodParameter parameter, NativeWebRequest webRequest)
-			throws IOException, ClassNotFoundException {
+	private Object parseJsonParam(MethodParameter parameter, NativeWebRequest webRequest) throws IOException {
 		// 获得@JsonParam注解的value值
 		JsonParam jsonParam = parameter.getParameterAnnotation(JsonParam.class);
 		String paramName = "";
@@ -105,13 +97,12 @@ public class JsonParamArgumentResolver implements HandlerMethodArgumentResolver 
 		// jsonString -> obj
 		Type type = parameter.getNestedGenericParameterType();
 		Class<?> clazz = parameter.getContainingClass();
-		JavaType javaType = OBJECT_MAPPER.constructType(GenericTypeResolver.resolveType(type, clazz));
+		JavaType javaType = JSON.getObjectMapper().constructType(GenericTypeResolver.resolveType(type, clazz));
+
 		try {
-			return OBJECT_MAPPER.readValue(paramValue, javaType);
+			return JSON.getObjectMapper().readValue(paramValue, javaType);
 		} catch (InvalidDefinitionException ex) {
 			throw new HttpMessageConversionException("Type definition error: " + ex.getType(), ex);
-		} catch (JsonProcessingException ex) {
-			throw new HttpMessageNotReadableException("JSON parse error: " + ex.getOriginalMessage(), ex);
 		}
 	}
 
