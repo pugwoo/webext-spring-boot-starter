@@ -1,6 +1,7 @@
 package com.pugwoo.bootwebext;
 
 import com.pugwoo.bootwebext.converter.StringToDateConverter;
+import com.pugwoo.bootwebext.converter.StringToLocalDateConverter;
 import com.pugwoo.bootwebext.converter.StringToLocalDateTimeConverter;
 import com.pugwoo.bootwebext.resolver.JsonParamArgumentResolver;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -56,6 +57,7 @@ public class SpringBootWebextAutoConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		registry.addConverter(new StringToDateConverter());
+		registry.addConverter(new StringToLocalDateConverter());
 		registry.addConverter(new StringToLocalDateTimeConverter());
 	}
 
