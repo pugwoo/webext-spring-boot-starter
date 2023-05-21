@@ -3,6 +3,7 @@ v0.1.1 - [fix] 修复因自定义ObjectMapper而出现LocalDate/LocalDateTime序
        - [simplify] 引入woo-utils，简化代码
        - [add] 增加对LocalDate的解析支持
        - [add] 支持Date和LocalDateTime自定义解析格式
+       - [fix] 修复@RequestBody中LocalDate字段不支持多种格式解析的问题
 
 2022年1月17日
 v0.1.0 - [enhance] @JsonParam支持@Validated进行数据校验

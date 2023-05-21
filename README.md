@@ -49,7 +49,7 @@ webext.format.localDateTime=yyyy-MM-dd HH:mm:ss
     // controller
     @ResponseBody @RequestMapping("/testJsonParam")
     public WebJsonBean testJsonParam(@JsonParam("test") UserDO userDO){
-        //TODO something
+        // something
         return new WebJsonBean();
     }
     

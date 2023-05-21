@@ -51,12 +51,9 @@ public class TestStringToDateController {
 	/**
 	 * http://127.0.0.1:8080/testStringToDate3
 	 * {
-	 *     "myDate": "20190525123456"
+	 *     "myDate": "20190525 123456"
 	 * }
-	 * @param form
-	 * @return
 	 */
-    // TODO 这个有bug
     @PostMapping("/testStringToDate3")
     public WebJsonBean testStringDate3(@RequestBody MyForm form) {
         if(form == null) {
@@ -65,6 +62,6 @@ public class TestStringToDateController {
         if(form.getMyDate() == null) {
             return new WebJsonBean(ErrorCode.COMMON_BIZ_ERROR, "form.myDate is null");
         }
-        return new WebJsonBean(form.getMyDate());
+        return new WebJsonBean(form);
     }
 }
