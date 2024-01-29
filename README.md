@@ -4,9 +4,9 @@
 
 本项目的目的用于扩展spring-boot-web项目，提供一些常用的功能，完全不影响原spring-boot-web自带的功能，同时无需任何配置。
 
-## 2. 适用范围：spring-boot-web 2.x
+## 2. 适用范围：spring-boot-web 2.x 和 3.x
 
- 该项目不支持 ``spring-boot 1.x``。
+ 该项目不支持 `spring-boot 1.x`。
 
 ## 3. 功能介绍：在spring-boot-web的基础上，支持以下特性：
 
@@ -24,7 +24,7 @@
   <dependency>
     <groupId>com.pugwoo</groupId>
     <artifactId>webext-spring-boot-starter</artifactId>
-    <version>0.1.1</version>
+    <version>0.3.0</version>
   </dependency>
 ```
 
