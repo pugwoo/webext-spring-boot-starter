@@ -16,7 +16,6 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -69,17 +68,24 @@ public class JsonParamArgumentResolver implements HandlerMethodArgumentResolver 
 			paramName = jsonParam.value();
 		}
 		
-		HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
-		if (request == null) {
-			throw new RuntimeException("No HttpServletRequest");
+		Object request = webRequest.getNativeRequest();
+		if (request instanceof javax.servlet.http.HttpServletRequest) {
+			return parse(paramName, parameter, (javax.servlet.http.HttpServletRequest) request);
+		} else if (request instanceof jakarta.servlet.http.HttpServletRequest) {
+			return parse(paramName, parameter, (jakarta.servlet.http.HttpServletRequest) request);
+		} else {
+			throw new UnsupportedOperationException("Unknown request type: " + request.getClass().getName());
 		}
-		
+	}
+
+	private Object parse(String paramName, MethodParameter parameter,
+						 jakarta.servlet.http.HttpServletRequest request) throws IOException {
 		String paramValue;
 		if(paramName.isEmpty()) {
 			// 把reqeust的body读取到StringBuilder
 			BufferedReader reader = request.getReader();
 			StringBuilder sb = new StringBuilder();
-			
+
 			char[] buf = new char[1024];
 			int rd;
 			while((rd = reader.read(buf)) != -1){
@@ -89,11 +95,45 @@ public class JsonParamArgumentResolver implements HandlerMethodArgumentResolver 
 		} else {
 			paramValue = request.getParameter(paramName);
 		}
-		
+
 		if(paramValue == null || paramValue.trim().isEmpty()) {
 			return null;
 		}
-		
+
+		// jsonString -> obj
+		Type type = parameter.getNestedGenericParameterType();
+		Class<?> clazz = parameter.getContainingClass();
+		JavaType javaType = JSON.getObjectMapper().constructType(GenericTypeResolver.resolveType(type, clazz));
+
+		try {
+			return JSON.getObjectMapper().readValue(paramValue, javaType);
+		} catch (InvalidDefinitionException ex) {
+			throw new HttpMessageConversionException("Type definition error: " + ex.getType(), ex);
+		}
+	}
+
+	private Object parse(String paramName, MethodParameter parameter,
+						 javax.servlet.http.HttpServletRequest request) throws IOException {
+		String paramValue;
+		if(paramName.isEmpty()) {
+			// 把reqeust的body读取到StringBuilder
+			BufferedReader reader = request.getReader();
+			StringBuilder sb = new StringBuilder();
+
+			char[] buf = new char[1024];
+			int rd;
+			while((rd = reader.read(buf)) != -1){
+				sb.append(buf, 0, rd);
+			}
+			paramValue = sb.toString();
+		} else {
+			paramValue = request.getParameter(paramName);
+		}
+
+		if(paramValue == null || paramValue.trim().isEmpty()) {
+			return null;
+		}
+
 		// jsonString -> obj
 		Type type = parameter.getNestedGenericParameterType();
 		Class<?> clazz = parameter.getContainingClass();

@@ -1,6 +1,5 @@
 package com.pugwoo.bootwebext.bean;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
@@ -13,7 +12,7 @@ public class DownloadBean extends ResponseEntity<byte[]> {
 	 * @param bytes 下载的二进制内容
 	 */
 	public DownloadBean(String filename, byte[] bytes) {
-		super(bytes, DownloadBeanUtils.getHeaders(filename), HttpStatus.OK);
+		super(bytes, DownloadBeanUtils.getHeaders(filename), 200);
 	}
 	
 	/**
@@ -23,7 +22,7 @@ public class DownloadBean extends ResponseEntity<byte[]> {
 	 */
 	public DownloadBean(String filename, String content) {
 		super(content == null ? new byte[0] : content.getBytes(),
-				DownloadBeanUtils.getHeaders(filename), HttpStatus.OK);
+				DownloadBeanUtils.getHeaders(filename), 200);
 	}
 	
 	/**
@@ -32,7 +31,7 @@ public class DownloadBean extends ResponseEntity<byte[]> {
 	 * @param bytes 下载的二进制内容
 	 */
 	public DownloadBean(String filename, byte[] bytes, Map<String, String> headers) {
-		super(bytes, DownloadBeanUtils.getHeaders(filename, headers), HttpStatus.OK);
+		super(bytes, DownloadBeanUtils.getHeaders(filename, headers), 200);
 	}
 	
 	/**
@@ -42,7 +41,7 @@ public class DownloadBean extends ResponseEntity<byte[]> {
 	 */
 	public DownloadBean(String filename, String content, Map<String, String> headers) {
 		super(content == null ? new byte[0] : content.getBytes(),
-				DownloadBeanUtils.getHeaders(filename, headers), HttpStatus.OK);
+				DownloadBeanUtils.getHeaders(filename, headers), 200);
 	}
 
 

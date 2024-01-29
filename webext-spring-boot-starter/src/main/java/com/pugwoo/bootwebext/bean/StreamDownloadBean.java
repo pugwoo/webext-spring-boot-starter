@@ -15,7 +15,7 @@ public class StreamDownloadBean extends ResponseEntity<InputStreamResource> {
 	 * @param in 输入流
 	 */
 	public StreamDownloadBean(String filename, InputStream in) {
-		super(new InputStreamResource(in), DownloadBeanUtils.getHeaders(filename), HttpStatus.OK);
+		super(new InputStreamResource(in), DownloadBeanUtils.getHeaders(filename), 200);
 	}
 	
 	/**
@@ -25,7 +25,7 @@ public class StreamDownloadBean extends ResponseEntity<InputStreamResource> {
 	 * @param headers 自定义头部
 	 */
 	public StreamDownloadBean(String filename, InputStream in, Map<String, String> headers) {
-		super(new InputStreamResource(in), DownloadBeanUtils.getHeaders(filename, headers), HttpStatus.OK);
+		super(new InputStreamResource(in), DownloadBeanUtils.getHeaders(filename, headers), 200);
 	}
 
 	/**

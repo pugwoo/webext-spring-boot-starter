@@ -1,3 +1,6 @@
+2024年1月29日
+v0.2.0 - [enhance] 支持spring boot 3
+
 2023年5月21日
 v0.1.1 - [fix] 修复因自定义ObjectMapper而出现LocalDate/LocalDateTime序列化成json报错的问题
        - [simplify] 引入woo-utils，简化代码

@@ -16,7 +16,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <spring-boot.version>2.7.12</spring-boot.version>
+    <spring-boot.version>2.7.18</spring-boot.version>
   </properties>
 
   <developers>
@@ -43,7 +43,21 @@
     <dependency>
       <groupId>com.pugwoo</groupId>
       <artifactId>woo-utils</artifactId>
-      <version>[1.1.11,)</version>
+      <version>[1.2.4,)</version>
+    </dependency>
+
+    <!-- compatible with spring boot 2 -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+    </dependency>
+
+    <!-- compatible with spring boot 3 -->
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>6.0.0</version>
     </dependency>
 
     <dependency>
