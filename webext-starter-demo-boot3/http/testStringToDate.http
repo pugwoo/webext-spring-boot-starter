@@ -1,0 +1,9 @@
+POST http://127.0.0.1:8080/testStringToDate3
+Content-Type: application/json
+
+{
+	 "myDate": "20190525123456",
+     "myLocalDate": "20190525",
+     "myLocalDateTime": "20190525123456",
+     "myLocalTime": "12:34:56"
+}
