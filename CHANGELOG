@@ -1,3 +1,6 @@
+2025年3月4日
+v0.4.0 - [enhance] 优化maven依赖: javax.servlet和jakarta.servlet scope改成provided
+
 2024年1月29日
 v0.3.0 - [enhance] 支持spring boot 3
 

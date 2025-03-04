@@ -6,7 +6,7 @@
 
   <groupId>com.pugwoo</groupId>
   <artifactId>webext-spring-boot-starter</artifactId>
-  <version>0.3.0</version>
+  <version>0.4.0</version>
   <packaging>jar</packaging>
 
   <name>webext-spring-boot-starter</name>
@@ -43,7 +43,7 @@
     <dependency>
       <groupId>com.pugwoo</groupId>
       <artifactId>woo-utils</artifactId>
-      <version>[1.2.4,)</version>
+      <version>[1.3.9,)</version>
     </dependency>
 
     <!-- compatible with spring boot 2 -->
@@ -51,13 +51,15 @@
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>4.0.1</version>
+      <scope>provided</scope>
     </dependency>
 
     <!-- compatible with spring boot 3 -->
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
-      <version>6.0.0</version>
+      <version>6.1.0</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>

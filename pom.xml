@@ -10,6 +10,7 @@
 	<modules>
 		<module>webext-spring-boot-starter</module>
 		<module>webext-starter-demo</module>
+		<module>webext-starter-demo-boot3</module>
 	</modules>
 
 </project>

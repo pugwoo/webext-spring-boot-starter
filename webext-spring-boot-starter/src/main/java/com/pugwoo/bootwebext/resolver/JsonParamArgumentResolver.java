@@ -69,13 +69,30 @@ public class JsonParamArgumentResolver implements HandlerMethodArgumentResolver 
 		}
 		
 		Object request = webRequest.getNativeRequest();
-		if (request instanceof javax.servlet.http.HttpServletRequest) {
-			return parse(paramName, parameter, (javax.servlet.http.HttpServletRequest) request);
-		} else if (request instanceof jakarta.servlet.http.HttpServletRequest) {
+		if (isHaveInterface(request, "jakarta.servlet.http.HttpServletRequest")) {
 			return parse(paramName, parameter, (jakarta.servlet.http.HttpServletRequest) request);
-		} else {
+		} else if (isHaveInterface(request, "javax.servlet.http.HttpServletRequest")) {
+			 return parse(paramName, parameter, (javax.servlet.http.HttpServletRequest) request);
+		 } else {
 			throw new UnsupportedOperationException("Unknown request type: " + request.getClass().getName());
 		}
+	}
+
+	private static boolean isHaveInterface(Object object, String interfaceClass) {
+		if (object == null || interfaceClass == null) {
+			return false;
+		}
+		Class<?> currentClass = object.getClass();
+		while (currentClass != null) {
+			Class<?>[] currentInterfaces = currentClass.getInterfaces();
+			for (Class<?> iface : currentInterfaces) {
+				if (interfaceClass.equals(iface.getName())) {
+					return true;
+				}
+			}
+			currentClass = currentClass.getSuperclass();
+		}
+		return false;
 	}
 
 	private Object parse(String paramName, MethodParameter parameter,
